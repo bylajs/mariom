@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+  {% block content %}
+    {% block scripts %}
+      <script src="{% static 'js/jquery-2.0.1.js' %}"></script>
+      <script src="{% static 'js/bootstrap4.3.1.min.js' %}"></script>
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/profilo.css' %}"/>
+    <body>
+      {% if messages %}
+        <ul class="messages">
+          <div class="row" role='alert'>
+            <div class="col-sm-11 col-sm-offset-3" role='alert'>
+              {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+              </button></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data" action="modificaprofilo">
+          {% csrf_token %}
+          <div class="container-fluid">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-800">Profilo</h1>
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div style="box-shadow: 0 8px 40px rgba(64, 63, 63, 0.2);" class="card card-user">
+                  <div class="card-header">
+                    <h5 class="card-title">Modifica Profilo</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-5 pr-1">
+                        <div class="form-group">
+                          <label>Societa</label>
+                          <input type="text" class="form-control" disabled="" value="Assoluto">
+                        </div>
+                      </div>
+                      <div class="col-md-3 px-1">
+                        <div class="form-group">
+                          <label>Nome</label>
+                          <input type="text" class="form-control" id="id_first_name" name="first_name" value="{{ user.first_name }}" />
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label>Cognome</label>
+                          <input type="text" class="form-control" id="id_last_namee" name="last_name" value="{{ user.last_name }}" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 pr-1">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Email</label>
+                          <input type="text" class="form-control" id="id_email" name="email" value="{{ user.email }}" />
+                        </div>
+                      </div>
+                      <div class="col-md-6 pl-1">
+                        <div class="form-group">
+                          <label>Ruolo</label>
+                          <input type="text" class="form-control" id="id_ruolo" name="ruolo" value="{{ user.userprofile.ruolo }}" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>Indirizzo e Civico</label>
+                          <input type="text" class="form-control" id="id_indirizzo" name="indirizzo" value="{{ user.userprofile.indirizzo }}" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4 pr-1">
+                        <div class="form-group">
+                          <label>Citta</label>
+                          <input type="text" class="form-control" id="id_citta" name="citta" value="{{ user.userprofile.citta }}" />
+                        </div>
+                      </div>
+                      <div class="col-md-4 px-1">
+                        <div class="form-group">
+                          <label>Paese</label>
+                          <input type="text" class="form-control" id="id_paese" name="paese" value="{{ user.userprofile.paese }}" />
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label>Cap</label>
+                          <input type="text" class="form-control" id="id_ecap" name="ecap" value="{{ user.userprofile.ecap }}" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>Su di Me</label>
+                          <input type="text" class="form-control" id="id_descrizione" name="descrizione" value="{{ user.userprofile.descrizione }}" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="update ml-auto mr-auto">
+                        <button type="submit" class="btn btn-success btn-round">Aggiorna Profilo</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <label for="slider"></label>
+              <div class="wrapper">
+                <div class="top-icons">
+                </div>
+                <div class="profile">
+                  {% if user.userprofile.image %}
+                  <img src="{{ user.userprofile.image.url }}" class="thumbnail">
+                  {% endif %}
+                  <h3 class="name">{{ user.first_name }} {{ user.last_name }}</h3> 
+                  <div class="check"><i class="fas fa-check"></i></div>
+                  <input style="position: relative;left: 45px;" type="file" id="id_image" name="image" accept="image/*">
+                  <p>Clica sul pulsante per cambiare la foto</p>
+                  <button type="button" class="btn">{{ user.userprofile.ruolo }}</button>
+                </div>
+                <div class="social-icons">
+                  <div class="icon">
+                    <a><i class="fas fa-globe-europe"></i></a>
+                    <h4>{{ user.userprofile.paese }}</h4>
+                  </div>
+                  <div class="icon">
+                    <a><i class="fas fa-city"></i></a>
+                    <h4>{{ user.userprofile.citta }}</h4>
+                  </div>
+                  <div class="icon">
+                    <a><i class="fab fa-periscope"></i></a>
+                    <h4>{{ user.userprofile.ecap }}</h4>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </body>
+        {% endblock %}
+      </html>
