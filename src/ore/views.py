@@ -45,6 +45,8 @@ def carica(request):
     else:  
         form = CreateNewOre()  
     return render(request,'carica.html',{'form':form}) 
+  
+  
 @login_required(login_url='/login/')
 @permission_required('ore.is_operatore', raise_exception=True)
 #faqa qe shikon operatori
@@ -69,7 +71,10 @@ def guarda(request):
     except EmptyPage:
         ore = paginator.page(paginator.num_pages)
     return render(request,"guarda.html",{'ore':ore,'qcok':qcok,'oret':oret,'ok':ok,'ko':ko,'sum':sum,'contratti':contratti,'contrattiko':contrattiko})
-#faqa qe shikon supervizori
+
+  
+  
+  #faqa qe shikon supervizori
 @login_required(login_url='/login/') 
 def guardatutto(request):
     if not request.user.is_staff:
@@ -94,6 +99,8 @@ def guardatutto(request):
     except EmptyPage:
         ore = paginator.page(paginator.num_pages)
     return render(request,"guardatutto.html",{'ore':ore,'qcoktutto':qcoktutto,'orettutto':orettutto,'oktutto':oktutto,'kotutto':kotutto,'sum':sum,'contratti':contratti,'contrattiko':contrattiko})
+  
+  
 #azioni per te modifikuar objektin
 @login_required(login_url='/login/') 
 def correggia(request, id):
@@ -101,7 +108,9 @@ def correggia(request, id):
        return redirect('/error_404')  
     ore = Ore.objects.get(id=id)  
     return render(request,'correggia.html', {'ore':ore})  
-#azioni per te aggiornuar objektin
+
+  
+  #azioni per te aggiornuar objektin
 @login_required(login_url='/login/') 
 def aggiorna(request, id):
     if not request.user.is_staff:
@@ -113,6 +122,8 @@ def aggiorna(request, id):
         messages.success(request, 'Scheda Aggiornata con successo.')
         return redirect("/guardatutto")  
     return render(request, 'correggia.html', {'ore': ore,}) 
+  
+  
 #azioni per te fshir objektin 
 @login_required(login_url='/login/') 
 def Cancella(request, id):
@@ -127,6 +138,8 @@ def Cancella(request, id):
         "ore": ore
     }
     return render(request, "scheda-cancellata.html", context)
+  
+  
 #formi per te kerkuar per operatorin  
 def is_valid_queryparam(param):
     return param != '' and param is not None
@@ -168,6 +181,9 @@ def orecerca(request):
         'qcok':qcok,
     } 
     return render(request, "guarda.html", context,)
+  
+  
+  
 #formi per te kerkuar per supervizorin    
 @login_required(login_url='/login/') 
 def orecercatutto(request):
