@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import Contratti  
 from .forms import LuceForm 
 
-
+asdasdsadsda
 
 admin.site.register(Contratti)
  
