@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+  {% block content %}
+           {% block scripts %}
+            <script src="{% static 'js/jquery-2.0.1.js' %}"></script>
+            <script src="{% static 'js/bootstrap4.3.1.min.js' %}"></script>
+        {% endblock %}
+    <body>
+            {% if messages %}
+                <ul class="messages">
+                    <div class="row" role='alert'>
+                        <div class="col-sm-11 col-sm-offset-3" role='alert'>
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+  </button></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+      <link href="{% static 'css/box-icon.css' %}" rel="stylesheet">
+      <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Area Personale</h1>
+          <a href="{% url 'export_oreop_csv' %}"  class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Scarica Report</a>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-3 col-md-7 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Mese ({% now "F Y" %})</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ oret.totals|floatformat }}</div>
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ore Lavorate</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="far fa-clock fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-7 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Mese ({% now "F Y" %})</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ ok.totals }}</div>
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Contratti Ok</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-check fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-7 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Mese ({% now "F Y" %})</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ ko.totals }}</div>
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Contratti Ko</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-thumbs-down fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-7 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Mese ({% now "F Y" %})</div>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto">
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ qcok }}</div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Quality Call Ok</div>
+                      </div>
+                      <div class="col">
+                        <div class="progress progress-sm mr-2">
+                          <div class="progress-bar" role="progressbar" style="width: {{ qcok }}%;">{{ qcok }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-headset fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+              <form method="GET" action="orecerca">
+                <div class="form-row">
+                  <div class="form-group mx-sm-3 mb-2">
+                    <div class="col-15">
+                      <label for="dataDateMin">Dal</label>
+                      <input type="date" class="form-control" id="dataDateMin" name="date_min">
+                      <i class="fas fa-calendar-alt"></i>
+                    </div>
+                  </div>
+                  <div class="form-group mx-sm-3 mb-2">
+                    <div class="col-15">
+                      <label for="dataDateMax">Al</label>
+                      <input type="date" class="form-control" id="dataDateMax" name="date_max">
+                      <i class="fas fa-calendar-alt"></i>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>Cerca Per Stato Contratto</label>
+                    <select name="statuse" id="id_statuse" class="custom-select">
+                      <option value=""></option>
+                      <option value="In Lavorazione">In Lavorazione</option>
+                      <option value="Check Call Ok">Check Call Ok</option>
+                      <option value="Check Call Ko">Check Call Ko</option>
+                      <option value="Moroso">Moroso</option>
+                      <option value="Ripensamento">Ripensamento</option>
+                      <option value="In Attivazione">In Attivazione</option>
+                      <option value="Rispinto">Rispinto</option>
+                      <option value="Attivo">Attivo</option>
+                      <option value="Recesso">Recesso</option>
+                    </select>
+                  </div>
+                  <div class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                      <button class="btn btn-success mb-2" style="position: relative;top: 17px;border-top-width: 1px; " ><span style="position: relative;top: 7px;right: 4px;" class="fas fa-search" ></span>Cerca</button>
+                      <a class="btn btn-secondary mx-sm-3 mb-2" href="{% url 'guarda' %}" role="button" style="position: relative;top: 17px;border-top-width: 1px;"><span style="position: relative;top: 6px;right: 4px;" class="fas fa-sync-alt" ></span>Reset</a>
+                    </div>
+                  </div>
+                </div>
+                </form>
+                <br/>
+                {% block css %}
+                  <link href="{% static 'css/icon.css' %}" rel="stylesheet">
+                {% endblock css %}
+                <table style="box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15) !important; border-radius: 0px 0px 25px 25px;" class="table table-striped table-sm">
+                  <thead class="thead">
+                    <tr>
+                      <th>Data</th>
+                      <th>Ore</th>
+                      <th>Contratti Ok</th>
+                      <th>Contratti Ko</th>
+                      <th>Cliente</th>
+                      <th>Stato</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for ore in ore %}
+                      <tr>
+                        <td>{{ore.data|date:"D d M Y"}}</td>
+                        <td>{{ore.oret|floatformat }}</td>
+                        <td>{{ore.contrattiok}}</td>
+                        <td>{{ore.contrattiko}}</td>
+                        <td>{{ore.nomecognome}}</td>
+                        <td>{{ore.statuse}}</td>
+                             {% empty %}
+                              <div class="alert alert-secondary" role="alert">
+  <li>Ops... non ci sono schede nella tabella.</li> 
+</div>  
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      <tfoot>
+                      <tr>
+                        <td colspan="1">Totale</td>
+                        <td>{{ sum.totals|floatformat }}</td>
+                        <td>{{ contratti.totals }}</td>
+                        <td>{{ contrattiko.totals }}</td>
+                        <td colspan="2"></td>
+                      </tr>
+                      </tfoot>
+                    </table>    
+                    {% if ore.has_other_pages %}
+                      <ul class="pagination">
+                        <li class="page-item disabled">
+                          {% if ore.has_previous %}
+                            <li  class="page-item"><a class="page-link" href="?page={{ ore.previous_page_number }}">Indietro</a></li>
+                          {% else %}
+                            <li class="page-item disabled">
+                              <li class="page-link"><span>Indietro</span></li>
+                            {% endif %}
+                            {% for i in ore.paginator.page_range %}
+                              {% if ore.number == i %}
+                                <li class="page-item active">
+                                  <a  class="page-link"><span>{{ i }} <span class="sr-only">(current)</span></a></span></li>
+                                {% else %}
+                                  <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                              {% endfor %}
+                              {% if ore.has_next %}
+                                <li class="page-item" ><a class="page-link" href="?page={{ ore.next_page_number }}">Avanti</a></li>
+                              {% else %}
+                                <li class="page-item disabled"><a class="page-link"><span>Avanti</span></a></li>
+                              {% endif %}
+                            </ul>
+                          {% endif %}
+                          <br>
+                          <br>
+                           {% endblock %}
+                        </body>
+                    </html>
