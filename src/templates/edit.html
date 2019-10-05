@@ -1,0 +1,286 @@
+{% extends "base.html" %}
+{% load static %}
+  {% block content %}
+    <body>
+      <form method="POST" enctype="multipart/form-data" class="post-form" autocomplete="off" action="/update/{{contratti.id}}/">
+        {% csrf_token %}
+        <div class="container-fluid">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="Dati-tab" href="#Dati">Scheda Cliente</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="Luce-tab"href="#Luce">Dati Fornitura</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="spm-tab"href="#spm">Spedizione E Modalita Di Pagamento</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="Dati" role="tabpanel" aria-labelledby="Dati-tab">
+            <div class="card shadow mb-4">
+              <div class="card-header"><h6 class="m-0 font-weight-bold text-primary">DATI INTERNI</h6></div>
+              <div class="card-body text-primary">
+                <p class="card-text"><div class="form-row">
+                  <div class="col">
+                    <label>Data Inserimento</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="edata" id="id_edata" value="{{ contratti.edata }}"/>
+                  </div>
+                  <div class="col">
+                    <label>Supervizore</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="esupervizore" id="id_esupervizore" value="{{ contratti.esupervizore }}" />
+                  </div>
+                  <div class="col">
+                    <label>Operatore</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="eoperatore" id="id_eoperatore" value="{{ contratti.eoperatore }}" />
+                  </div>
+                </div>
+                <div class="card-header"></div>
+                <div class="card-header"><h6>DATI CLIENTE</h6></div>
+                <div class="form-row">
+                  <div class="col">
+                    <label>Nome</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="enome" id="id_enome" value="{{ contratti.enome }}" />
+                  </div>
+                  <div class="col">
+                    <label>Cognome</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="ecognome" id="id_ecognome" value="{{ contratti.ecognome }}" />
+                  </div>
+                  <div class="col">
+                    <label>Codice Fiscale</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="ecodicefiscale" id="id_ecodicefiscale" value="{{ contratti.ecodicefiscale }}" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm">
+                    <label>Codice Cliente</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="numerocliente" id="id_numerocliente" value="{{ contratti.numerocliente }}" />
+                  </div>
+                  <div class="col-sm">
+                    <label>Documento</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="edocumento" id="id_edocumento" value="{{ contratti.edocumento }}" />
+                  </div>
+                  <div class="col-sm">
+                    <label>Numero</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="enumero" id="id_enumero" value="{{ contratti.enumero }}" />
+                  </div>
+                </div>
+                 <div class="card-header"></div>
+                <div class="card-header"><h6>CONTATTI</h6></div>
+                <div class="form-row">
+                  <div class="col">
+                    <label>E-mail</label>
+                    <input style="text-align: center;" type="email" class="form-control" name="eemail" id="id_eemail" value="{{ contratti.eemail }}" />
+                  </div>
+                  <div class="col">
+                    <label>Cellulare</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="ecellulare" id="id_ecellulare" value="{{ contratti.ecellulare }}" />
+                  </div>
+                  <div class="col">
+                    <label>Telefono</label>
+                    <input style="text-align: center;" type="text" class="form-control" name="etelefono" id="id_etelefono" value="{{ contratti.etelefono }}" />
+                  </div>
+                </div>
+                 <div class="card-header"></div>
+                <div class="card-header" style="text-align: center;"><h6>INDIRIZZO DI RESIDENZA</h6></div>
+                <div class="row">
+                  <div class="col"><label>Via</label>
+                  <input style="text-align: center; width: 278px;" type="text" class="form-control" id="id_evia" name="evia" value="{{ contratti.evia }}" />
+                </div>
+                <div class="col"><label>Civico</label>
+                <input style="text-align: center; width: 117px;" type="text" class="form-control" id="id_ecivico" name="ecivico" value="{{ contratti.ecivico }}" />
+              </i></div>
+              <div class="col"><label>Cap</label>
+              <input style="text-align: center; width: 125px;" type="text" class="form-control" id="id_ecap" name="ecap" value="{{ contratti.ecap }}" />
+            </div>
+            <div class="col"><label>Comune</label>
+            <input style="text-align: center; width: 148px;" type="text" class="form-control" id="id_ecomune" name="ecomune" value="{{ contratti.ecomune }}" />
+          </div>
+          <div class="col"><label>Provincia</label>
+          <input style="text-align: center; width: 185px;" type="text" class="form-control" id="id_eprovincia" name="eprovincia" value="{{ contratti.eprovincia }}" />
+        </div>
+      </div>
+      
+    </p>
+  </div>
+</div>
+</div>
+<div class="tab-pane" id="Luce" role="tabpanel" aria-labelledby="Luce-tab">
+<div class="card shadow mb-4">
+  <div class="card-header"><h6 class="m-0 font-weight-bold text-primary">DATI FORNITURA LUCE</h6></div>
+  <div class="card-body text-primary">
+    <p class="card-text"><div class="form-row">
+      <div class="col">
+        <label>Attuale Fornitore</label>
+        <input style="text-align: center;" type="text" class="form-control" name="efornitore" id="id_efornitore" value="{{ contratti.efornitore }}" />
+      </div>
+      <div class="col">
+        <label>Pod</label>
+        <input style="text-align: center;" type="text" class="form-control" name="epod" id="id_epod" value="{{ contratti.epod }}" />
+      </div>
+      <div class="col">
+        <div class="col">
+          <label>Tipologia Cliente</label>
+          <input style="text-align: center;" type="text" class="form-control" name="etipologia" id="id_etipologia"value="{{ contratti.etipologia }}" />
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <label>Potenza Impegnata</label>
+        <input style="text-align: center;" type="text" class="form-control" name="epotenzaimpegnata" id="id_epotenzaimpegnata" value="{{ contratti.epotenzaimpegnata }}" />
+      </div>
+      <div class="col">
+        <label>Potenza Disponibile</label>
+        <input style="text-align: center;" type="text" class="form-control" name="epotenzadisponibile" id="id_epotenzadisponibile" value="{{ contratti.epotenzadisponibile }}" />
+      </div>
+      <div class="col">
+        <label>Consumo Annuo</label>
+        <input style="text-align: center;" type="text" class="form-control" name="econsumoannuo" id="id_econsumoannuo" value="{{ contratti.econsumoannuo }}" />
+      </div>
+    </div>
+     <div class="card-header"></div>
+    <div class="card-header" style="text-align: center;"><h6>INDIRIZZO DI FORNITURA</h6></div>
+    <div class="row">
+      <div class="col"><label>Via</label>
+      <input style="text-align: center; width: 278px;" type="text" class="form-control" id="id_eviafornitura" name="eviafornitura" value="{{ contratti.eviafornitura }}" />
+    </div>
+    <div class="col"><label>Civico</label>
+    <input style="text-align: center; width: 117px;" type="text" class="form-control" id="id_ecivicofornitura" name="ecivicofornitura" value="{{ contratti.ecivicofornitura }}" />
+  </div>
+  <div class="col"><label>Cap</label>
+  <input style="text-align: center; width: 125px;" type="text" class="form-control" id="id_ecapfornitura" name="ecapfornitura" value="{{ contratti.ecapfornitura }}" />
+</div>
+<div class="col"><label>Comune</label>
+<input style="text-align: center; width: 148px;" type="text" class="form-control" id="id_ecomunefornitura" name="ecomunefornitura" value="{{ contratti.ecomunefornitura }}" />
+
+</div>
+<div class="col"><label>Provincia</label>
+<input  style="text-align: center; width: 185px;" type="text" class="form-control" id="id_eprovinciafornitura" name="eprovinciafornitura" value="{{ contratti.eprovinciafornitura }}" />
+</div>
+</div>
+<div class="card-header"></div>
+<div class="card-header"><h6 class="m-0 font-weight-bold text-primary">DATI FORNITURA GAS</h6></div>
+<div class="form-row">
+<div class="col">
+<label>Attuale Fornitore</label>
+<input style="text-align: center;" type="text" class="form-control" name="efornitoregas" id="id_efornitoregas" value="{{ contratti.efornitoregas }}" />
+</div>
+<div class="col">
+<label>Pdr</label>
+<input style="text-align: center;" type="text" class="form-control" name="epdr" id="id_epdr" value="{{ contratti.epdr }}" />
+</div>
+<div class="col">
+<label>Consumo Annuo</label>
+<input style="text-align: center;" type="text" class="form-control" name="econsumoannuogas" id="id_econsumoannuogas" value="{{ contratti.econsumoannuogas }}" />
+</div>
+</div>
+<div class="form-row">
+<div class="col">
+<label>Codice Remi</label>
+<input style="text-align: center;" type="text" class="form-control" name="eremi" id="id_eremi" value="{{ contratti.eremi }}" />
+</div>
+<div class="col">
+<label>Matricola Contattore</label>
+<input style="text-align: center;" type="text" class="form-control" name="ematricola" id="id_ematricola" value="{{ contratti.ematricola }}" />
+</div>
+<div class="col">
+<label>Pronto Intervento</label>
+<input style="text-align: center;" type="text" class="form-control" name="eprontointervento" id="id_eprontointervento" value="{{ contratti.eprontointervento }}" />
+</div>
+</div>
+<div class="row">
+<div class="col-sm">
+</div>
+<div class="col-sm">
+<label>Tipologia D'uso</label>
+<input style="text-align: center;" type="text" class="form-control" name="etipologiaduso" id="id_etipologiaduso" value="{{ contratti.etipologiaduso }}" />
+</div>
+<div class="col-sm">
+</div>
+</div>
+ <div class="card-header"></div>
+<div class="card-header" style="text-align: center;"><h6>INDIRIZZO DI FORNITURA</h6></div>
+<div class="row">
+<div class="col"><label>Via</label>
+<input style="text-align: center; width: 278px;" type="text" class="form-control" id="id_eviagas" name="eviagas" value="{{ contratti.eviagas }}" />
+</div>
+<div class="col"><label>Civico</label>
+<input style="text-align: center; width: 117px;" type="text" class="form-control" id="id_ecivicogas" name="ecivicogas" value="{{ contratti.ecivicogas }}" />
+</div>
+<div class="col"><label>Cap</label>
+<input style="text-align: center; width: 125px;" type="text" class="form-control" id="id_ecapgas" name="ecapgas" value="{{ contratti.ecapgas }}" />
+</div>
+<div class="col"><label>Comune</label>
+<input style="text-align: center; width: 148px;" type="text" class="form-control" id="id_ecomunegas" name="ecomunegas" value="{{ contratti.ecomunegas }}" />
+</div>
+<div class="col"><label>Provincia</label>
+<input style="text-align: center; width: 185px;" type="text" class="form-control" id="id_eprovinciagas" name="eprovinciagas" value="{{ contratti.eprovinciagas }}" />
+</div>
+</div>
+</p>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="spm" role="tabpanel" aria-labelledby="spm-tab">
+<div class="card shadow mb-4">
+<div class="card-header"><h6 class="m-0 font-weight-bold text-primary">SPEDIZIONE PAGAMENTO E ALLEGATI</h6></div>
+<div class="card-body text-primary">
+<p class="card-text"><div class="form-row">
+<div class="col">
+<label>Spedizione Fatture</label>
+<input style="text-align: center;" type="text" class="form-control" name="eindirizzospedizione" id="id_eindirizzospedizione" value="{{ contratti.eindirizzospedizione }}" />
+</div>
+<div class="col">
+<label>Modalita Di Pagamento</label>
+<input style="text-align: center;" type="text" class="form-control" name="emodalita" id="id_emodalita" value="{{ contratti.emodalita }}" />
+</div>
+<div class="col">
+<label>Codice Iban</label>
+<input style="text-align: center;" type="text" class="form-control" name="iban" id="id_iban" value="{{ contratti.iban }}" />
+</div>
+</div>
+<div class="form-row">
+<div class="col">
+<label>Pubblicita</label>
+<input style="text-align: center;" type="text" class="form-control" name="epubblicita" id="id_epubblicita" value="{{ contratti.epubblicita }}" />
+</div>
+<div class="col">
+<label>Tipologia Contratto</label>
+<input style="text-align: center;" type="text" class="form-control" name="econtratto" id="id_econtratto" value="{{ contratti.econtratto }}" />
+</div>
+<div class="col">
+<label>Rec</label>
+<input style="text-align: center;" type="text" class="form-control" name="ecarica" id="id_ecarica" value="{{ contratti.ecarica }}" />
+</div>
+</div>
+<div class="container">
+<div class="row align-items-start">
+<div class="col">
+<label>Data Stimata Attivazione</label>
+<input style="text-align: center;position: relative;width: 326px;left: -7%;" type="text" class="form-control" name="eattivazione" id="id_eattivazione" value="{{ contratti.eattivazione }}" />
+</div>
+<div class="col">
+</div>
+<div class="col">
+<label>Stato</label>
+<input style="text-align: center;position: relative;width: 326px;left: 7%;" type="text" class="form-control" name="esito" id="id_esito" value="{{ contratti.esito }}" />
+</div>
+</div>
+</div>
+</p>
+<br>
+<div class="btn-toolbar" style="padding-left: 15px">
+ <a href="/show" button class="btn btn-secondary" type="button" style="position: relative;right: 15px;"><span style="position: relative;top: 5px;right: 4px;" class="fas fa-arrow-circle-left"></span>Indietro</button></a>
+<button type="submit" class="btn btn-success"><span style="position: relative;top: 7px;right: 4px;" class="fas fa-paper-plane"></span>Aggiorna</button></div>
+</div>
+</div> 
+</form>
+</div>
+{% block scripts %}
+<script src="{% static 'js/mytab.js' %}"></script>
+<script src="{% static 'js/myTabs.js' %}"></script>
+{% endblock %}
+</body>
+</html>
+{% endblock %}
