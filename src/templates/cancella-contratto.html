@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+ <div class="container-fluid">
+        <div style="border-radius: 20px; height: 420px" class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Elimina</h6>
+              </div>
+        <div class="container">
+          <br>
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+            </div>
+          </div>
+<form action='.' method='POST'>
+	{% csrf_token %}
+  <div class="modal-body"> 
+    <span style="color: red;">
+    <i class="fas fa-exclamation-circle fa-5x"></i>
+  </span>
+    <br>
+    <br>
+    <h6 class="m-0 font-weight-bold text-primary">Confermi la cancellazione dell'elemento contratti selezionato?</h6>
+    <p><input style="position: relative;width: 155px;left: 300px; top: 38px;" class="btn btn-success" type='submit' value='Sì, sono sicuro' />  <a style="position: relative;width: 155px;left: 500px;" class="btn btn-secondary" href='/show'>No, torna indietro</a></p>
+</form>
+  </div>
+       </div>
+         </div>
+         </div>
+          </div>
+           </div>
+    
+
+
+
+{% endblock %}
