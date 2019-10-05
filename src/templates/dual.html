@@ -1,0 +1,374 @@
+{% extends "base.html" %}
+{% load static %} 
+    {% block content %}
+        {% block scripts %}
+            <script src="{% static 'js/jquery-2.0.1.js' %}"></script>
+            <script src="{% static 'js/stepwizard.js' %}"></script>
+            <script src="{% static 'js/indirizzo.js' %}"></script>
+            <script src="{% static 'js/indirizzodual.js' %}"></script>
+            <script src="{% static 'js/checkbox.js' %}"></script>
+            <script src="{% static 'js/bootstrap4.3.1.min.js' %}"></script>
+        {% endblock %}
+        {% block css %}
+            <link href="{% static 'css/wizard1.css' %}" rel="stylesheet">
+            <link href="{% static 'css/icon.css' %}" rel="stylesheet">
+        {% endblock css %}
+        <body>
+            {% if messages %}
+                <ul class="messages">
+                    <div class="row">
+                        <div class="col-sm-11 col-sm-offset-3">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                            </button></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <form method="POST" enctype="multipart/form-data" class="post-form" autocomplete="off"
+ action="/dual">
+                    {% csrf_token %}
+                    <div class="container-fluid">
+                        <div class="stepwizard">
+                            <div class="stepwizard-row setup-panel">
+                                <div class="stepwizard-step col-xs-3">
+                                    <a style="border-color: #d1d3e2"; href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+                                    <p><small>Dati Cliente</small></p>
+                                </div>
+                                <div class="stepwizard-step col-xs-3">
+                                    <a style="border-color: #d1d3e2"; href="#step-2" type="button" class="btn btn-default btn-circle">2</a>
+                                    <p><small>Dati Fornitura Luce</small></p>
+                                </div>
+                                <div class="stepwizard-step col-xs-3">
+                                    <a style="border-color: #d1d3e2"; href="#step-3" type="button" class="btn btn-default btn-circle">3</a>
+                                    <p><small>Dati Fornitura Gas</small></p>
+                                </div>
+                                <div class="stepwizard-step col-xs-3">
+                                    <a style="border-color: #d1d3e2"; href="#step-4" type="button" class="btn btn-default btn-circle">4</a>
+                                    <p><small>Attiva Adesso</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <input type="hidden" readonly class="form-control" name="econtratto" id="id_econtratto" value="Dual" value="{{ contratti.econtratto }}" />
+                                    <label for="id_econtratto">
+                                        <i class="fab fa-angellist fa-2x" alt='id_econtratto' style="color: #ff2600; position: relative;left: -1800%; top: -144px"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary setup-content" id="step-1">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"></h3>
+                            </div>
+                            <div class="container">
+                                <div class="row align-items-start">
+                                    <div class="col">
+                                        <label>Data</label>
+                                        <input type="date" class="form-control" id="id_edata" name="edata" required>
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Supervizore</label>
+                                        {{ form.esupervizore }}
+                                        <i class="fas fa-id-badge"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Operatore</label>
+                                        {{ form.eoperatore }}
+                                        <i class="fas fa-user-tag"></i>
+                                    </div>
+                                </div>
+                                <br>
+                                <h5 style="text-align: center; border-style: groove;border-color: #0000 #4440 #fdf9f8 #0000;width: 199px;left: 390px;position: relative;border-radius: 3px;">DATI DEL CLIENTE</h5>
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <label>Nome</label>
+                                        {{ form.enome }}
+                                        <i class="fas fa-user-circle"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Cognome</label>
+                                        {{ form.ecognome }}
+                                        <i class="fas fa-user-circle"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Codice Fiscale</label>
+                                        {{ form.ecodicefiscale }}
+                                        <i class="fas fa-user-check"></i>
+                                    </div>
+                                </div>
+                                <div class="row align-items-start">
+                                    <div class="col">
+                                        <label>Email</label>
+                                        {{ form.eemail }}
+                                        <i class="fas fa-at"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Documento</label>
+                                        {{ form.edocumento }}
+                                        <i class="fas fa-passport"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Numero Documento</label>
+                                        {{ form.enumero }}
+                                        <i class="fas fa-id-card"></i>
+                                    </div>
+                                </div>
+                                <div class="row align-items-end">
+                                    <div class="col">
+                                        <label>Telefono</label>
+                                        {{ form.etelefono }}
+                                        <i class="fas fa-tty"></i>
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                    <div class="col">
+                                        <label>Cellulare</label>
+                                        {{ form.ecellulare }}
+                                        <i class="fas fa-mobile"></i>
+                                    </div>
+                                </div>
+                                <h5 style="text-align: center; border-style: groove;border-color: #0000 #4440 #fdf9f8 #0000;width: 200px;left: 390px;position: relative;border-radius: 3px;">Indirizzo Di Residenza</h5>
+                                <i class="fas fa-arrow-down"></i>
+                                <div class="row">
+                                    <div class="col">
+                                        <label>Via</label>
+                                        <input type="text" class="form-control" id="id_evia" name="evia" style="width: 278px;" required>
+                                    <i class="fas fa-road"></i></div>
+                                    <div class="col">
+                                        <label>Civico</label>
+                                        <input type="text" class="form-control" id="id_ecivico" name="ecivico" style="width: 105px;" required>
+                                    <i class="fas fa-sort-numeric-up"></i></div>
+                                    <div class="col">
+                                        <label style="position: relative;left: -7px;">Cap</label>
+                                        <input type="text" class="form-control" id="id_ecap" name="ecap" style="width: 110px;" required>
+                                    <i class="fab fa-periscope"></i></div>
+                                    <div class="col">
+                                        <label>Comune</label>
+                                        <input type="text" class="form-control" id="id_ecomune" name="ecomune" style="width: 185px;" required>
+                                        <i class="fas fa-map-pin"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Provincia</label>
+                                        <input type="text" class="form-control" id="id_eprovincia" name="eprovincia" style="width: 185px;" required>
+                                    <i class="fas fa-map"></i></div>
+                                </div>
+                                <br>
+                                <button class="btn btn-primary nextBtn pull-right" type="button">Avanti<span style="position: relative;top: 1px;right: -5px;" class="fas fa-arrow-circle-right"></span></button>
+                            </div>
+                        </div>
+                        <div class="panel panel-primary setup-content" id="step-2">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"></h3>
+                            </div>
+                            <div class="container">
+                                <div class="row align-items-start">
+                                    <div class="col">
+                                        <label>Fornitore</label>
+                                        {{ form.efornitore }}
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Pod</label>
+                                        {{ form.epod }}
+                                        <i class="fas fa-plug"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Tipologia Cliente</label>
+                                        {{ form.etipologia }}
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <label>Potenza Impegnata</label>
+                                        {{ form.epotenzaimpegnata }}
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Potenza Disponibile</label>
+                                        {{ form.epotenzadisponibile }}
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="col">
+                                        <label>Consumo Annuo</label>
+                                        {{ form.econsumoannuo }}
+                                        <i class="fas fa-battery-empty"></i>
+                                    </div>
+                                </div>
+                                <h5 style="text-align: center; border-style: groove;border-color: #0000 #4440 #fdf9f8 #0000;width: 200px;left: 390px;position: relative;border-radius: 3px;">Indirizzo Di Fornitura</h5>
+                                <i class="fas fa-arrow-down"></i>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="uguale" name="uguale" onchange= "indirizzoFunction()"/>
+                                    <label class="custom-control-label" for = "uguale">Se Uguale Al Indirizzo Di Residenza Clicca Il Box</label>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col"><label>Via</label>
+                                    <input type="text" class="form-control" id="id_eviafornitura" name="eviafornitura" style="width: 278px;" required>
+                                <i class="fas fa-road"></i></div>
+                                <div class="col">
+                                    <label>Civico</label>
+                                    <input type="text" class="form-control" id="id_ecivicofornitura" name="ecivicofornitura" style="width: 107px;" required>
+                                <i class="fas fa-sort-numeric-up"></i></div>
+                                <div class="col">
+                                    <label>Cap</label>
+                                    <input type="text" class="form-control" id="id_ecapfornitura" name="ecapfornitura" style="width: 105px;" required>
+                                <i class="fab fa-periscope"></i></div>
+                                <div class="col">
+                                    <label>Comune</label>
+                                    <input type="text" class="form-control" id="id_ecomunefornitura" name="ecomunefornitura" style="width: 185px;" required>
+                                    <i class="fas fa-map-pin"></i>
+                                </div>
+                                <div class="col">
+                                    <label>Provincia</label>
+                                    <input type="text" class="form-control" id="id_eprovinciafornitura" name="eprovinciafornitura" style="width: 185px;" required>
+                                <i class="fas fa-map"></i></div>
+                            </div>
+                            <br>
+                            <div class="btn-toolbar" style="padding-left: 15px">
+                                <button class="btn btn-secondary backBtn pull-left" type="button" style="position: relative;right: 15px;"><span style="position: relative;top: 5px;right: 4px;" class="fas fa-arrow-circle-left"></span>Indietro</button>
+                                <button class="btn btn-primary nextBtn pull-right" type="button">Avanti<span style="position: relative;top: 5px;right: -5px;" class="fas fa-arrow-circle-right"></span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary setup-content" id="step-3">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                        </div>
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <label>Fornitore</label>
+                                {{ form.efornitoregas }}
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="col">
+                                <label>Pdr</label>
+                                {{ form.epdr }}
+                                <i class="fas fa-burn"></i>
+                            </div>
+                            <div class="col">
+                                <label>Tipologia D'uso</label>
+                                {{ form.etipologiaduso }}
+                                <i class="fas fa-bath"></i>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <label>Remi</label>
+                                {{ form.eremi }}
+                                <i class="fab fa-free-code-camp"></i>
+                            </div>
+                            <div class="col">
+                                <label>Matricola</label>
+                                {{ form.ematricola }}
+                                <i class="fas fa-weight"></i>
+                            </div>
+                            <div class="col">
+                                <label>Pronto Intervento</label>
+                                {{ form.eprontointervento }}
+                                <i class="fas fa-phone-square-alt"></i>
+                            </div>
+                        </div>
+                        <div class="row justify-content-between">
+                            <div class="col-4">
+                                <label>Consumo Annuo</label>
+                                {{ form.econsumoannuogas }}
+                                <i class="fas fa-gas-pump"></i>
+                            </div>
+                            <div class="col-4">
+                            </div>
+                        </div>
+                        <h5 style="text-align: center; border-style: groove;border-color: #0000 #4440 #fdf9f8 #0000;width: 200px;left: 390px;position: relative;border-radius: 3px;">Indirizzo Di Fornitura</h5>
+                        <i class="fas fa-arrow-down"></i>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="ugualegas" name="ugualegas" onchange= "indirizzogasFunction()"/>
+                            <label class="custom-control-label" for = "ugualegas">Se Uguale Al Indirizzo Di Residenza Clicca Il Box</label>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col"><label>Via</label>
+                            <input type="text" class="form-control" id="id_eviagas" name="eviagas" style="width: 278px;" required>
+                        <i class="fas fa-road"></i></div>
+                        <div class="col">
+                            <label>Civico</label>
+                            <input type="text" class="form-control" id="id_ecivicogas" name="ecivicogas" style="width: 120px;" required>
+                        <i class="fas fa-sort-numeric-up"></i></div>
+                        <div class="col">
+                            <label>Cap</label>
+                            <input type="text" class="form-control" id="id_ecapgas" name="ecapgas" style="width: 120px;" required>
+                        <i class="fab fa-periscope"></i></div>
+                        <div class="col">
+                            <label>Comune</label>
+                            <input type="text" class="form-control" id="id_ecomunegas" name="ecomunegas" style="width: 185px;" required>
+                            <i class="fas fa-map-pin"></i>
+                        </div>
+                        <div class="col">
+                            <label>Provincia</label>
+                            <input type="text" class="form-control" id="id_eprovinciagas" name="eprovinciagas" style="width: 185px;" required>
+                        <i class="fas fa-map"></i></div>
+                    </div>
+                    <br>
+                    <div class="btn-toolbar" style="padding-left: 15px">
+                        <button class="btn btn-secondary backBtn pull-left" type="button" style="position: relative;right: 15px;"><span style="position: relative;top: 5px;right: 4px;" class="fas fa-arrow-circle-left"></span>Indietro</button>
+                        <button class="btn btn-primary nextBtn pull-right" type="button">Avanti<span style="position: relative;top: 5px;right: -5px;" class="fas fa-arrow-circle-right"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary setup-content" id="step-4">
+                <div class="panel-heading">
+                    <h3 class="panel-title"></h3>
+                </div>
+                <div class="container">
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <label>Indirizzo Spedizione Fatture</label>
+                            {{ form.eindirizzospedizione }}
+                            <i class="fas fa-share"></i>
+                        </div>
+                        <div class="col">
+                            <label>Modalita Di Pagamento</label>
+                            {{ form.emodalita }}
+                            <i class="fas fa-euro-sign"></i>
+                        </div>
+                        <div class="col">
+                            <div class="custom-control custom-checkbox" style="top: 14px;">
+                                <input type="checkbox" class="custom-control-input" id="emodalita" name="modalita">
+                                <br>
+                                <label class="custom-control-label" for="emodalita">Se Rid Clica Per Caricare IBan</label>
+                            </div>
+                        </div>
+                        <div id="iban">
+                            Inserisci L'Iban: {{ form.iban }}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <label>Pubblicita</label>
+                            {{ form.epubblicita }}
+                            <i class="fab fa-buysellads"></i>
+                        </div>
+                        <div class="col">
+                            <label>Data Stimata Attivazione</label>
+                            {{ form.eattivazione }}
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="col">
+                            <label>Carica La Rec</label>
+                            <input type="file" name="ecarica" id="id_ecarica" value="{{ contratti.ecarica }}" />
+                        </div>
+                    </div>
+                    <br>
+                    <div class="btn-toolbar" style="padding-left: 15px">
+                        <button class="btn btn-secondary backBtn pull-left" type="button" style="position: relative;right: 15px;"><span style="position: relative;top: 5px;right: 4px;" class="fas fa-arrow-circle-left"></span>Indietro</button>
+                        <button type="submit" class="btn btn-success">Invia<span style="position: relative;top: 5px;right: -5px;" class="fas fa-paper-plane"></span></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+{% endblock %}
+</html>
