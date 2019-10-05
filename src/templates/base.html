@@ -1,0 +1,294 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Assoluto">
+    <meta name="author" content="Portale">
+    {% include "head_css.html" %}
+    {% include "navbar.html" %} 
+  </head>
+  {% block content %}
+    <body>
+      <link href="{% static 'css/progresscicle.css' %}" rel="stylesheet">
+      <link href="{% static 'css/tableusers.css' %}" rel="stylesheet">
+      <script src="{% static 'js/jquery-2.0.1.js' %}"></script>
+      <script src="{% static 'js/bootstrap4.3.1.min.js' %}"></script>
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Dashboard</h1> 
+        </div>
+        <!-- Content Row -->
+        <div class="row">
+          <!-- Earnings (Monthly) Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Mese ({% now "F Y" %})</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ luce }}</div>
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Contratti Luce</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="far fa-lightbulb fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Earnings (Monthly) Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Mese ({% now "F Y" %})</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ gas }}</div>
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Contratti Gas</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-burn fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Pending Requests Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Mese ({% now "F Y" %})</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ dual }}</div>
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Contratti Dual</div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fab fa-angellist fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Earnings (Monthly) Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Mese ({% now "F Y" %})</div>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto">
+                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ tutto }}</div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Contratti Totale</div>
+                      </div>
+                      <div class="col">
+                        <div class="progress progress-sm mr-2">
+                          <div class="progress-bar" role="progressbar" style="width: {{ tutto }}%;">{{ tutto }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-wallet fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Project Card Example -->
+        <div class="row">
+          <div class="col-sm-6">
+            <div style="position: relative;width: 485px;border-radius: 10px;" class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Obiettivo {% now "F" %} 100%</h6>
+              </div>
+              <div class="card-body">
+                <h4 class="small font-weight-bold">Contratti Luce <span class="float-right">{{ luce }}%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-primary" role="progressbar" style="width: {{ luce }}%;">{{ luce }}</div>
+                </div>
+                <h4 class="small font-weight-bold">Contratti Gas <span class="float-right">{{ gas }}%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: {{ gas }}%;">{{ gas }}</div>
+                </div>
+                <h4 class="small font-weight-bold">Contratti Dual <span class="float-right">{{ dual }}%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: {{ dual }}%;">{{ dual }}</div>
+                </div>
+                <h4 class="small font-weight-bold">Contratti Totale <span class="float-right">{{ tutto }}%</span></h4>
+                <div class="progress mb-4">
+                  <div class="progress-bar bg-info" role="progressbar" style="width: {{ tutto }}%;">{{ tutto }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Project pie chart Example -->
+          <div class="col-sm-6">
+            <div style="position: relative;height: 21.8em;" class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">{% now "l j F" %} Obiettivo 5 Contratti</h6>
+              </div>
+              <h4 style="position: relative;right: 175px;top: 43px;" class="small font-weight-bold">Contratti Luce</h4>
+              <div style="position: relative;left: 46px;top: 92px;" class="progress-circle p{{ luceoggi }}">
+                <span>{{ luceoggi }}</span>
+                <div class="left-half-clipper">
+                  <div class="first50-bar"></div>
+                  <div class="value-bar"></div>
+                </div>
+              </div>
+              <h4 style="position: relative;top: -20px;" class="small font-weight-bold">Contratti Gas</h4>
+              <div style="position: relative;left: 222px;top: 30px;" class="progress-circle p{{ gasoggi }}">
+                <span>{{ gasoggi }}</span>
+                <div class="left-half-clipper">
+                  <div class="first50-bar"></div>
+                  <div class="value-bar"></div>
+                </div>
+              </div>
+              <h4 style="position: relative;top: -83px; left: 172px" class="small font-weight-bold">Contratti Dual</h4>
+              <div style="position: relative;left: 393px;top: -35px;" class="progress-circle p{{ dualoggi }}">
+                <span>{{ dualoggi }}</span>
+                <div class="left-half-clipper">
+                  <div class="first50-bar"></div>
+                  <div class="value-bar"></div>
+                </div>
+              </div>
+              <h4 style="position: relative;top: 21px;" class="small font-weight-bold">Contratti Totale</h4>
+              <div style="position: relative;width: 448px;left: 15px;top: 19px;" class="progress mb-4">
+                  <div class="progress-bar bg-dark" role="progressbar" style="width: {{ tuttooggi }}%;">{{ tuttooggi }}</div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div style="position: relative;width: 485px;border-radius: 10px;" class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Stato Contratti {% now "F" %}</h6>
+              </div>
+              <div style="border: #fff;" class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="d-flex align-items-center pb-2">
+                        <div class="dot-indicator bg-success mr-2"></div>
+                        <p class="mb-0">Contratti Ok {% now "F" %}</p>
+                      </div>
+                      <h4 class="font-weight-semibold">{{ oktuttohome.totals }}</h4>
+                      <div class="progress progress-md">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ oktuttohome.totals }}%;">{{ oktuttohome.totals }}</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                      <div class="d-flex align-items-center pb-2">
+                        <div class="dot-indicator bg-danger mr-2"></div>
+                        <p class="mb-0">Contratti Ko {% now "F" %}</p>
+                      </div>
+                      <h4 class="font-weight-semibold">{{ kotuttoohome.totals }}</h4>
+                      <div class="progress progress-md">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: {{ kotuttoohome.totals }}%;">{{ kotuttoohome.totals }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div style="position: relative;width: 485px;border-radius: 10px;" class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Azienda</h6>
+              </div>
+              <div style="border: #fff;" class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="d-flex align-items-center pb-2">
+                        <div class="dot-indicator bg-primary mr-2"></div>
+                        <p class="mb-0">Collaboratori</p>
+                      </div>
+                      <h4 class="font-weight-semibold">{{ count }}</h4>
+                      <div class="progress progress-md">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ count }}%;">{{ count }}</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                      <div class="d-flex align-items-center pb-2">
+                        <div class="dot-indicator bg-warning mr-2"></div>
+                        <p class="mb-0">Supervizori</p>
+                      </div>
+                      <h4 class="font-weight-semibold">{{ supervizori }}</h4>
+                      <div class="progress progress-md">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: {{ supervizori }}%;">{{ supervizori }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="position: relative;width: 1041px;right: 25px" class="container bootstrap snippet">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="main-box no-header clearfix">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Campionato {% now "F" %}!</h6>
+                </div>
+                <div class="main-box-body clearfix">
+                  <div class="table-responsive">
+                    <table class="table user-list">
+                      <thead>
+                        <tr>
+                          <th><span style="position: relative;left: 32px;">Nome</span></th>
+                          <th><span>Cognome</span></th>
+                          <th class="text-center"><span>Progresso</span></th>
+                          <th>contratti</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+    {% for user in users %}
+    <tr>
+        <td>
+          {% if user.userprofile.image %}
+            <img src="{{ user.userprofile.image.url }}" class="thumbnail">
+            {% endif %}
+            <h4 style="position: relative;top: 12px;" class="small font-weight-bold">{{ user }}</h4>
+        </td>
+        <td><h4 class="small font-weight-bold">{{user.last_name}}</h4></td>
+        <td><div class="progress progress-md">
+        <div class="progress-bar bg-success" role="progressbar" style="width: {{ user.total_contrattiok }}%;">{{ user.total_contrattiok }}</div></td>
+        </div>
+        <td><h4 style="margin:1px; width: 30px;height: 30px;text-align: center;padding: 6px 0;font-size: 12px;line-height: 1.428571429;border-radius: 15px;" class="btn btn-info btn-circle" class="small font-weight-bold">{{ user.total_contrattiok }}</h4>
+        </td>
+        {% empty %}
+                              <div class="alert alert-secondary" role="alert">
+  <li>Ops... Non e stato fatto ancora il primo contratto</li> 
+</div>  
+    </tr>
+    {% endfor %}
+</tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Assoluto 2019</span>
+            </div>
+          </div>
+        </footer>
+        <!-- End of Footer -->
+      </body>
+    {% endblock %}
+  </html>
