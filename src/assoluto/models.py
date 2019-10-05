@@ -266,3 +266,6 @@ class Contratti(models.Model):
     class Meta:  
         db_table = "contratti"
         ordering = ('-edata',)
+        
+    def __str__(self):
+        return self.user
